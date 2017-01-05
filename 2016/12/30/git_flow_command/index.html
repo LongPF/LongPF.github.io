@@ -13,11 +13,11 @@
 
     <title>
         
-          龙鹏飞的博客 | longpengfei&#39;s Blog
+          git flow 常用命令 - 龙鹏飞的博客 | longpengfei&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="longpengfei.club/i_dont_wanna_use_default_archives/2015/12/">
+    <link rel="canonical" href="longpengfei.club/2016/12/30/git_flow_command/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -137,7 +137,139 @@
 
 
     <!-- Main Content -->
-    <!-- Default Archive layout, we use archives instead. -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="longpengfei.club/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#git" title="git">git</a>
+                        
+                    </div>
+                    <h1>git flow 常用命令</h1>
+                    <h2 class="subheading">记录便于使用查找</h2>
+                    <span class="meta">
+                        Posted by longpengfei on
+                        2016-12-30
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>###<code>git flow feature start branchname</code> </p>
+<ul>
+<li>开始一个featuer分支,feature分支的名字一般为功能+人名,如capture.xiaoming</li>
+</ul>
+<p>###<code>git flow feature publish branchname</code> </p>
+<ul>
+<li>将一个featuer分支推到远程,多人开发</li>
+</ul>
+<p>###<code>git checkout -b feature/branchname origin/feature/branchname</code> </p>
+<ul>
+<li>将远程的featuer分支下到本地开发</li>
+</ul>
+<p>###<code>git flow feature finish branchname</code> </p>
+<ul>
+<li>合并至本地develop</li>
+<li>删除任务分支</li>
+</ul>
+<p>###<code>git pull --rebase</code> </p>
+<p>###<code>git flow release start v6.6.3</code> </p>
+<ul>
+<li>开始release分支</li>
+</ul>
+<p>###<code>git flow release publish v6.6.3</code></p>
+<p>###<code>git flow release finish v6.6.3</code> </p>
+<ul>
+<li>合并release分支到master</li>
+<li>在master上打上tag</li>
+<li>合并release到develop</li>
+<li>删除release</li>
+</ul>
+<p>###<code>git flow hotfix start v6.6.4</code></p>
+<ul>
+<li>开始修复分支</li>
+</ul>
+<p>###<code>git flow hotfix finish v6.6.4</code></p>
+<ul>
+<li>合并到master</li>
+<li>合并到develop</li>
+<li>在master上打tag</li>
+</ul>
+<h3 id="git-push-tags"><a href="#git-push-tags" class="headerlink" title="git push --tags"></a><code>git push --tags</code></h3><h2 id="git-flow"><a href="#git-flow" class="headerlink" title="git flow"></a>git flow</h2><p><img src="git_flow_command/flow.png" alt=""></p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/12/30/git_command/" data-toggle="tooltip" data-placement="top" title="git常用命令">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
 
     <!-- Footer -->
     <!-- Footer -->

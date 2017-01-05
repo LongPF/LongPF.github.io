@@ -13,11 +13,11 @@
 
     <title>
         
-          git常用命令 - 龙鹏飞的博客 | longpengfei&#39;s Blog
+          龙鹏飞的博客 | longpengfei&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="longpengfei.club/2015/12/30/git常用命令 记录便于使用查找/">
+    <link rel="canonical" href="longpengfei.club/i_dont_wanna_use_default_archives/2016/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -137,155 +137,7 @@
 
 
     <!-- Main Content -->
-    
-<!-- Image to hack wechat -->
-<!-- <img src="longpengfei.club/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
-
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        background-image: url('/img/home-bg.jpg')
-    }
-</style>
-<header class="intro-header" >
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        
-                          <a class="tag" href="/tags/#git" title="git">git</a>
-                        
-                    </div>
-                    <h1>git常用命令</h1>
-                    <h2 class="subheading">记录便于使用查找</h2>
-                    <span class="meta">
-                        Posted by longpengfei on
-                        2015-12-30
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-
-    <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <p>前:<strong>HEAD</strong>关键字是指当前分支的最新一次提交,就是版本库中该分支上的最新版本</p>
-<h3 id="git-init"><a href="#git-init" class="headerlink" title="git init"></a>git init</h3><p><code>git init</code> 初始化一个repo,创建一个.git文件夹</p>
-<h3 id="git-clone"><a href="#git-clone" class="headerlink" title="git clone"></a>git clone</h3><p><code>git clone url newname</code> nenamew 可以不要</p>
-<h3 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a>git log</h3><p><code>git log --oneline</code> 每条log显示一行</p>
-<p><code>git log --oneline --graph</code> 图形化</p>
-<p><code>git log branchname</code> 指定分支log</p>
-<p><code>git log --oneline branch1 ^branch2</code> 在分支1,不在分支2,^为排除</p>
-<p><code>git log --author=[author name]</code>指定作者</p>
-<p><code>git log --grep=keywords</code>筛选commit信息</p>
-<p><code>git log --grep=keywords --author=authorname</code> 是OR的关系,如果想为AND则添加–all-match</p>
-<h3 id="git-reflog"><a href="#git-reflog" class="headerlink" title="git reflog"></a>git reflog</h3><p>对reflog进行管理的命令,reflog是git用来记录引用变化的一种机制,比如记录分支的变化或者是HEAD引用的变化<br>当git reflog 不指定引用的时候,默认列出HEAD的reflog<br>git会将变化记录到HEAD对应的reflog文件中,其路径为.git/logs/HEAD,分支的reflog文件都放在.git/logs/refs目录下的子目录中.</p>
-<p><code>git reflog</code> 可以看到reset的commit</p>
-<h3 id="git-add"><a href="#git-add" class="headerlink" title="git add"></a>git add</h3><p><code>git add file</code></p>
-<p><code>git add .</code> 递归添加工作区的修改到暂缓区</p>
-<h3 id="git-commit"><a href="#git-commit" class="headerlink" title="git commit"></a>git commit</h3><p><code>git commit -m &quot;message&quot;</code></p>
-<p><code>git commit -amend -m &quot;message&quot;</code>取消上一次提交为新的提交信息</p>
-<h3 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h3><p><code>git reset HEAD filename</code> 将staged(暂缓去)中的撤销到工作区,filename 不加则撤销全部staged</p>
-<p> <code>git reset --hard id</code> HEAD指向变了,工作区,暂缓去修改都没了</p>
-<p> <code>git reset --mixed id</code> HEAD指向变了,工作区有修改,暂缓区没有</p>
-<p> <code>git reset --soft id</code> 相当于<code>git reset --mixed id</code>执行了add,HEAD指向变了,工作区没修改,暂缓去有修改</p>
-<p> 不加参数默认为<code>git reset --mixed id</code></p>
-<h3 id="git-revert"><a href="#git-revert" class="headerlink" title="git revert"></a>git revert</h3><p><code>git revert id</code> 反转撤销提交,撤销一个提交</p>
-<p><code>git revert -u id</code> 创建一个反向的提交,不回提交</p>
-<p><strong>git revert</strong> : 生成一个新的提交来撤销某次提交,push的时候不会有影响,HEAD指向新生成的commit</p>
-<p><strong>git reset</strong> : 回到历史的某一次提交,这次提交之后的内容会被删除,push的时候可能会有冲突,HEAD指向历史的某次commit</p>
-<h3 id="git-rm"><a href="#git-rm" class="headerlink" title="git rm"></a>git rm</h3><p><code>git rm</code></p>
-<h3 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a>git stash</h3><p><code>git stash</code> 将工作区,暂缓区的内容压栈,即货到上一次最新的提交</p>
-<p>在哪个分支入栈,则在哪个分支找回</p>
-<p><code>git stash list</code> 显示栈的list</p>
-<p><code>git stash pop</code> 出栈</p>
-<p><code>git stash apply ...</code> 取出栈内指定的快照(list不会删除)</p>
-<p><code>git stash drop ...</code> 删除指定的快照</p>
-<p><code>git stash clear</code> 删除整个list</p>
-<h3 id="git-branch"><a href="#git-branch" class="headerlink" title="git branch"></a>git branch</h3><p><code>git push -u orgin branchname</code>将一个分支推到远程</p>
-<p><code>git branch</code> 列出本地的分支</p>
-<p><code>git branch -a</code> 列出远程和本地的分支</p>
-<p><code>git branch -r</code> 列出远程的分支</p>
-<p><code>git branch -d branchname</code> 删除本地分支</p>
-<p><code>git push origin --delete branchname</code> 删除远程分支</p>
-<p><code>git branch -r -d origin/branchname</code> 删除远程分支</p>
-<h3 id="git-checkout"><a href="#git-checkout" class="headerlink" title="git checkout"></a>git checkout</h3><p><code>git checkout -b branchname</code> 创建并切换到该分支</p>
-<p><code>git checkout -b localbranchname origin/branchname</code>将远程分支拉到本地</p>
-<p><code>git checkout filename</code>删除工作区某个文件的修改</p>
-<h3 id="git-merge"><a href="#git-merge" class="headerlink" title="git merge"></a>git merge</h3><p><code>git merge branchname</code> 合并分支到当前分支</p>
-<h3 id="git-tag"><a href="#git-tag" class="headerlink" title="git tag"></a>git tag</h3><p><code>git tag -a 6.6.3 -m &quot;6.6.3版本&quot; commitid</code>  -a会允许你添加一些信息</p>
-<p><code>git show tagname</code></p>
-<p><code>git tag -d</code></p>
-<p><code>git push origin :refs/tags/tagname</code> 删除远程的tag</p>
-<p>‘git push origin tagname’ 将tag推到远程</p>
-<p><code>git push origin --tags</code> 将tag推到远程</p>
-<h3 id="git-fetch"><a href="#git-fetch" class="headerlink" title="git fetch"></a>git fetch</h3><p>将远程新的分支和数来下载下来</p>
-<p><code>git fetch</code> 获取当前仓库</p>
-<p><code>git fetch reponame</code></p>
-<p><code>git fetch --all</code>取到远程全部的repo</p>
-<h3 id="git-pull"><a href="#git-pull" class="headerlink" title="git pull"></a>git pull</h3><p><code>git pull</code> = <code>git fetch</code> + <code>git merge</code> 把取下来的分支的head merge到当前的分支,产生一个新的commit</p>
-<p><code>git pull --rebase</code> 这个会让 tree是一条直线,不回出现并行的tree,方便 reset和revert<br>–rebae ,将会执行 git rebase来取代原来的git merge</p>
-<h3 id="git-rebase"><a href="#git-rebase" class="headerlink" title="git rebase"></a>git rebase</h3><p>–rebase 不会产生合并的提交,它将会将本地的所有提交临时保存为补丁(patch),放在’.git/rebase’目录中,然后将当前分支更新到最新的分支尖端,最后把保存的不定应用到分支上.</p>
-<p>rebase过程中,可能会出现冲突,git会停止rebse让你解决冲突,解决后在git add去更新这些内容,然后无需执行commit,只需要:</p>
-<p><code>git rebase --continue</code>就会继续打余下的补丁</p>
-<p><code>git rebase --abort</code>将会终止rebase,当前分支将会回到rebase之前的状态</p>
-<h3 id="git-push"><a href="#git-push" class="headerlink" title="git push"></a>git push</h3><p><code>git push origin branchname</code>将当前分支推到远程origin的某个分支</p>
-
-
-                <hr>
-
-                
-
-                <ul class="pager">
-                    
-                    
-                </ul>
-
-                
-
-                
-
-            </div>
-    <!-- Side Catalog Container -->
-        
-
-    <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-
-                <!-- Friends Blog -->
-                
-            </div>
-
-        </div>
-    </div>
-</article>
-
-
-
-
-
-
-
-
+    <!-- Default Archive layout, we use archives instead. -->
 
     <!-- Footer -->
     <!-- Footer -->
