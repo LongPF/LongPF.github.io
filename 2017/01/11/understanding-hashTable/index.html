@@ -174,11 +174,9 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>#哈希表</p>
-<p>散列表(哈希表),是根据键而直接访问在内存存储位置的数据结构.也就是说,他通过计算一个关于键值的函数,将所需查询的数据映射到表中一个位置来访问记录,这加快了查找速度,这个映射函数称作散列函数,存放的数组称作散列表.</p>
+                <h1 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h1><p>散列表(哈希表),是根据键而直接访问在内存存储位置的数据结构.也就是说,他通过计算一个关于键值的函数,将所需查询的数据映射到表中一个位置来访问记录,这加快了查找速度,这个映射函数称作散列函数,存放的数组称作散列表.</p>
 <p>一个通俗的例子是,通讯录,通过字母w来查找’王’,这里用人名作关键字.</p>
-<p>##基本概念</p>
-<ul>
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><ul>
 <li><p>若关键字为k,则其值存放在f(k)的存储位置上.由此,不需要比较便可直接取得所查记录.f为散列函数,按这个思想简历的表为散列表.</p>
 </li>
 <li><p>对不同搞得关键字可能得到同一散列地址,即k1!=k2,f(k1)=f(k2),这种现象叫冲突,k1,k2称为同义词.综上所述根据散列函数f和处理冲突的方法将一组关键字映射到一个有限的连续的地址集(区间)上,并以关键字在地址集中的’像’作为记录在表中的存储位置,这种表便称为<strong>散列表</strong>,这一映射过程称为<strong>散列造表</strong>或散列,所得的存储位置称<strong>散列地址</strong>.</p>
@@ -186,18 +184,16 @@
 <li><p>若对于关键字集合中的任一个关键字,经散列函数映像到地址结合中任何一个地址的概率是相等的,则称此类散列函数为<strong>均匀散列函数</strong>,这就是使关键字经过散列函数得到一个’随机的地址’,从而减少冲突.</p>
 </li>
 </ul>
-<p>##构造散列函数</p>
-<p>散列函数能使一个数据序列的访问过程更加迅速有效,通过散列函数,数据元素将被更快定位.</p>
+<h1 id="构造散列函数"><a href="#构造散列函数" class="headerlink" title="构造散列函数"></a>构造散列函数</h1><p>散列函数能使一个数据序列的访问过程更加迅速有效,通过散列函数,数据元素将被更快定位.</p>
 <ul>
 <li><strong>1. 直接定址法 :</strong> 取关键字或关键字的某个线性函数值为散列地址.即hash(k)=a*k+b,其中ab为常数.这种散列函数叫做自身函数.</li>
 <li><strong>2. 数字分析法 :</strong> 假设关键字是以r为基的数,并且哈希表中可能出现的关键字都是事先知道的,则可取关键字的若干数位组成哈希地址.</li>
 <li><strong>3. 平方取中法 :</strong> 取关键字平方后的中间几位为哈希地址.一个数平方后的中间几位数和数的每一位都相关,由此使随机分布的关键字得到的哈希地址也是随机的.取得位数由表长决定</li>
 <li><strong>4. 折叠法 :</strong> 将关键字分割成位数相同的几部分(最后一部分的位数可以不同),然后取这几部分的叠加和(舍去进位)最为哈希地址</li>
 <li><strong>5. 随机数法</strong> </li>
-<li><strong>6. 除留余数法 :</strong>取关键字被某个不大于散列表表长m的数p除后所得的余数为散列地址.即hash(k)=k mod p, p&lt;=m.不仅可以对关键字直接取模,也可以在<strong>折叠法</strong>,平方取中法等运算之后取模.对p的选择很重要,一般取素数或m,若pxuanz不好,容易产生冲突</li>
+<li><strong>6. 除留余数法 :</strong>取关键字被某个不大于散列表表长m的数p除后所得的余数为散列地址.即hash(k)=k mod p, p&lt;=m.不仅可以对关键字直接取模,也可以在<strong>折叠法</strong>,平方取中法等运算之后取模.对p的选择很重要,一般取素数或m,若p选择不好,容易产生冲突</li>
 </ul>
-<p>##处理冲突</p>
-<p>为了知道冲突产生的相同散列函数地址所对应的关键字,必须选用另外的散列函数,或者对冲突结果进行处理.而不发生冲突的可能性是非常之小的,所以通常对冲突进行处理.</p>
+<h1 id="处理冲突"><a href="#处理冲突" class="headerlink" title="处理冲突"></a>处理冲突</h1><p>为了知道冲突产生的相同散列函数地址所对应的关键字,必须选用另外的散列函数,或者对冲突结果进行处理.而不发生冲突的可能性是非常之小的,所以通常对冲突进行处理.</p>
 <ul>
 <li><font color="#CD5C5C"><strong>开放定址法</strong></font>(open addressing) : hash<sub>i</sub> = (hash(key) + d<sub>i</sub>) mod m  ,其中hash(key)为散列函数,m为散列表长,d<sub>i</sub>为增量序列,i为已发生冲突次数.增量序列可有下列取法:</li>
 </ul>
@@ -339,19 +335,19 @@
 </ul>
 <p><strong>拉链法的去电 :</strong></p>
 <p>指针需要额外的空间,故当结点规模较小时,开放定址法较为节省空间,而若节省的指针空间用来扩大散列表的规模,可使装填椅子变小,这又减少了开放定址法中的冲突,从而提高平均查找速度.</p>
-<h3 id="C语言实现实现"><a href="#C语言实现实现" class="headerlink" title="C语言实现实现"></a>C语言实现实现</h3><ul>
+<h1 id="C语言实现实现"><a href="#C语言实现实现" class="headerlink" title="C语言实现实现 "></a>C语言实现实现 </h1><ul>
 <li>开放定址法 :</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">初始化 </div><div class="line"></div><div class="line">HashTable (int TableSize)</div><div class="line">&#123;</div><div class="line">	HashTable H;</div><div class="line">	int i;</div><div class="line">	/* 为散列分配空间 */</div><div class="line">	H = malloc( sizeof( struct HashTable ) );</div><div class="line">	</div><div class="line">	/* 散列表大小为一个质数 */</div><div class="line">	H-&gt;TableSize = Prime;</div><div class="line">	</div><div class="line">	/* 分配表所有地址的空间. */</div><div class="line">	H-&gt;Cells = malloc( sizeof( cell ) * H-&gt;TableSize );</div><div class="line">	</div><div class="line">	/*  地址初始为空 */</div><div class="line">	for ( i = 0; i &lt; H-&gt;TableSize; i++ )</div><div class="line">		 H-&gt;Cells[i].info = Empty;</div><div class="line">	</div><div class="line">	return H;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">查找空单元并插入</div><div class="line"></div><div class="line">Position Find ( ElementType Key, HashTable H )</div><div class="line">&#123;</div><div class="line">	Position Current;</div><div class="line">	int CollisionNum;</div><div class="line">	</div><div class="line">	/* 冲突次数初始为0 */</div><div class="line">	/* 通过表的大小对关键字进行处理. */</div><div class="line">	CollisionNum = 0;</div><div class="line">	Current = Hash( Key, H-&gt;TableSize );</div><div class="line">	</div><div class="line">	/* 不为空时进行查找 */</div><div class="line">	while( H-&gt;Cells[Current].info != Empty &amp;&amp; H-&gt;Cells[Current].Element != Key )</div><div class="line">	&#123;</div><div class="line">		Current = ++CollisionNum * ++CollisionNum;</div><div class="line">		</div><div class="line">		/* 向下查找超过范围时回到表开头 */</div><div class="line">		if (Current &gt;= H-&gt;TableSize)</div><div class="line">			Current -= H-&gt;TableSize;</div><div class="line">	&#125;</div><div class="line">	return Current;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="查找效率"><a href="#查找效率" class="headerlink" title="查找效率"></a>查找效率</h3><p>散列表的查找过程基本上和造表过程相同.一些关键码可通过散列函数转换的地址直接找到,另一些关键码在散列函数得到的地址上产生了冲突,需要按处理冲突的方法进行查找.在介绍三种处理冲突的方法中,产生冲突后的查找任然是给定值与关键码进行比较过程.所以,对散列表查找效率的量度,依然用平均查找长度来衡量.</p>
+<h1 id="查找效率"><a href="#查找效率" class="headerlink" title="查找效率"></a>查找效率</h1><p>散列表的查找过程基本上和造表过程相同.一些关键码可通过散列函数转换的地址直接找到,另一些关键码在散列函数得到的地址上产生了冲突,需要按处理冲突的方法进行查找.在介绍三种处理冲突的方法中,产生冲突后的查找任然是给定值与关键码进行比较过程.所以,对散列表查找效率的量度,依然用平均查找长度来衡量.</p>
 <p>查找过程中,关键码的比较次数,取决于产生冲突的多少,产生的冲突少,查找效率就高,产生的冲突多,查找效率就低.因此,印象产生冲突多少的因素,就是影响查找效率的因素.影响产生冲突度多少有一下三个因素 :</p>
 <ol>
 <li>散列函数是否均匀;</li>
 <li>处理冲突的方法;</li>
 <li>散列表的载荷因子.</li>
 </ol>
-<h3 id="载荷因子"><a href="#载荷因子" class="headerlink" title="载荷因子"></a>载荷因子</h3><p>散列表的载荷因子定义为 : &alpha; = 填入表中的元素个数 / 散列表的长度</p>
+<h1 id="载荷因子"><a href="#载荷因子" class="headerlink" title="载荷因子"></a>载荷因子</h1><p>散列表的载荷因子定义为 : &alpha; = 填入表中的元素个数 / 散列表的长度</p>
 <p>&alpha;越大产生冲突的可能性就越大.散列表的平均查找长度是载荷因子&alpha;的函数,只是不同处理冲突的方法又不同的函数.</p>
 <p>对于卡房定址法,载荷因子是特别重要要素,应严格限制在0.7-0.8一下.超过0.8,查表的cpu缓存不命中按指数曲线上升.因此,一些采用开放定址法的hash库,如java的系统限制了载荷因子为0.75,超过此值将resize散列表.</p>
 
