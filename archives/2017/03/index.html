@@ -13,11 +13,11 @@
 
     <title>
         
-          UIKit性能优化 - 龙鹏飞的博客 | longpengfei&#39;s Blog
+          龙鹏飞的博客 | longpengfei&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="longpengfei.com/2017/01/12/uikit-performance-optimization/">
+    <link rel="canonical" href="longpengfei.com/archives/2017/03/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -130,130 +130,7 @@
 
 
     <!-- Main Content -->
-    
-<!-- Image to hack wechat -->
-<!-- <img src="longpengfei.com/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
-
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        background-image: url('/img/home-bg.jpg')
-    }
-</style>
-<header class="intro-header" >
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        
-                          <a class="tag" href="/tags/#优化" title="优化">优化</a>
-                        
-                    </div>
-                    <h1>UIKit性能优化</h1>
-                    <h2 class="subheading">这个是读别人的文章一点整理</h2>
-                    <span class="meta">
-                        Posted by longpengfei on
-                        2017-01-12
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-
-    <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <p>##<strong>Instrument (command+I)</strong></p>
-<p><a href="https://bestswifter.com/uikitxing-neng-diao-you-shi-zhan-jiang-jie/" target="_blank" rel="external"><strong>原文地址</strong></a></p>
-<p>###<strong>Core Animation :</strong> </p>
-<p><strong>Color Blended Layers :</strong></p>
-<p>检测哪里发生了图层混合，并用红色标记出来。因此我们需要尽可能减少看到的红色区域。<br>对于UIImageView来说，不仅它自身需要是不透明的，它的图片也不能含有alpha通道.<br>PS：如果label文字有中文，依然会出现图层混合，这是因为此时label多了一个sublayer，如果有好的解决办法欢迎告诉我。</p>
-<p><strong>Color Hits Green and Misses Red :</strong></p>
-<p>表示如果命中缓存则显示为绿色，否则显示为红色，显然绿色越多越好，红色越少越好.<br>光栅化的核心在于缓存的思想。</p>
-<p>layer进行光栅化后渲染成位图放在缓存中。当屏幕出现滑动时，我们直接从缓存中读取而不必渲染，所以会看到绿色。当新的label出现时，缓存中没有个这个label的位图，所以会变成红色。第三点比较关键，缓存中的对象有效期只有100ms，即如果在0.1s内没有被使用就会自动从缓存中清理出去</p>
-<p>光栅化的缓存机制是一把双刃剑，先写入缓存再读取有可能消耗较多的时间。因此光栅化仅适用于较复杂的、静态的效果。通过Instrument的调试发现，这里使用光栅化经常出现未命中缓存的情况，如果没有特殊需要则可以关闭光栅化</p>
-<p><code>//    label.layer.shouldRasterize = true</code></p>
-<p><strong>Color Copied Images :</strong></p>
-<p>像素在内存中的布局和它在磁盘中的存储方式并不相同。考虑一种简单的情况：每个像素有R、G、B和alpha四个值，每个值占用1字节，因此每个像素占用4字节的内存空间。一张1920*1080的照片(iPhone6 Plus的分辨率)一共有2,073,600个像素，因此占用了超过8Mb的内存。但是一张同样分辨率的PNG格式或JPEG格式的图片一般情况下不会有这么大。这是因为JPEG将像素数据进行了一种非常复杂且可逆的转化。<br>“Color Copied Images”就用来检测这种实时的格式转化，如果有则会将图片标记为蓝色。<br>当我们打开JPEG格式的图片时，CPU会进行一系列运算，将JPEG图片解压成像素数据。显然这个工作会消耗不少时间，所以不应该在滑动时进行，我们应该预先处理好图片。<br>CPU主要处理两件事：</p>
-<p>把图片从PNG或JPEG等格式中解压出来，得到像素数据<br>如果GPU不支持这种颜色各式，CPU需要进行格式转换</p>
-<p><strong>Color Misaligned Images :</strong></p>
-<p>表示如果图片需要缩放则标记为黄色，如果没有像素对齐则标记为紫色<br>图片的缩放需要占用时间，因此我们要尽可能保证无论是本地图片还是从网络或取得图片的大小，都与其frame保持一致。</p>
-<p><strong>Color Offscreen-Rendered Yellow :</strong></p>
-<p>离屏渲染意味着把渲染结果临时保存，等用到时再取出，因此相对于普通渲染更占用资源。<br>会把需要离屏渲染的地方标记为黄色，大部分情况下我们需要尽可能避免黄色的出现。离屏渲染可能会自动触发，也可以手动触发。以下情况可能会导致触发离屏渲染：<br>重写drawRect方法<br>有mask或者是阴影(layer.masksToBounds, layer.shadow*)，模糊效果也是一种mask<br>layer.shouldRasterize = true</p>
-<p>前两者会自动触发离屏渲染，第三种方法是手动开启离屏渲染</p>
-<p>设置阴影的时候要指定path 要不会离屏渲染</p>
-<p>设置cornerRadius本身并不会导致离屏渲染，但很多时候它还需要配合layer.masksToBounds = true使用。根据之前的总结，设置masksToBounds会导致离屏渲染。解决方案是尽可能在滑动时避免设置圆角，如果必须设置圆角，可以使用光栅化技术将圆角缓存起来：</p>
-<p><strong>Color Compositing Fast-Path Blue:</strong></p>
-<p>用于标记由硬件绘制的路径，蓝色越多越好。</p>
-<p><strong>Flash updated Regions</strong></p>
-<p>刷新视图时，我们应该把需要重绘的区域尽可能缩小。对于未发生变化的内容则不应该重绘<br>用于标记发生重绘的区域。一个典型的例子是系统的时钟应用，绝大多数时候只有显示秒针的区域需要重绘</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>避免图层混合</p>
-<p>确保控件的opaque属性设置为true，确保backgroundColor和父视图颜色一致且不透明<br>如无特殊需要，不要设置低于1的alpha值<br>确保UIImage没有alpha通道<br>避免临时转换</p>
-<p>确保图片大小和frame一致，不要在滑动时缩放图片<br>确保图片颜色格式被GPU支持，避免劳烦CPU转换<br>慎用离屏渲染</p>
-<p>绝大多数时候离屏渲染会影响性能<br>重写drawRect方法，设置圆角、阴影、模糊效果，光栅化都会导致离屏渲染<br>设置阴影效果是加上阴影路径<br>滑动时若需要圆角效果，开启光栅化</p>
-
-
-                <hr>
-
-                
-
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2017/03/08/oc-framework-4-swift/" data-toggle="tooltip" data-placement="top" title="Swift调用objective-c的framework(非pod)需要注意的">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2017/01/11/understanding-hashTable/" data-toggle="tooltip" data-placement="top" title="了解哈希表">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                
-
-                
-
-            </div>
-    <!-- Side Catalog Container -->
-        
-
-    <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-
-                <!-- Friends Blog -->
-                
-            </div>
-
-        </div>
-    </div>
-</article>
-
-
-
-
-
-
-
-
+    <!-- Default Archive layout, we use archives instead. -->
 
     <!-- Footer -->
     <!-- Footer -->
