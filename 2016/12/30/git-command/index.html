@@ -195,7 +195,7 @@
 <p> <code>git reset --mixed id</code> HEAD指向变了,工作区有修改,暂缓区没有</p>
 <p> <code>git reset --soft id</code> 相当于<code>git reset --mixed id</code>执行了add,HEAD指向变了,工作区没修改,暂缓去有修改</p>
 <p> 不加参数默认为<code>git reset --mixed id</code></p>
-<h3 id="git-revert"><a href="#git-revert" class="headerlink" title="git revert"></a>git revert</h3><p><code>git revert id</code> 反转撤销提交,撤销一个提交</p>
+<h3 id="git-revert"><a href="#git-revert" class="headerlink" title="git revert"></a>git revert</h3><p><code>git revert commitid</code> 反转撤销提交,撤销一个提交,(临时新建)一个提交,该提交是commitid的parent commit,这时候会有confict,需要解决再 add,commit,…</p>
 <p><code>git revert -u id</code> 创建一个反向的提交,不回提交</p>
 <p><strong>git revert</strong> : 生成一个新的提交来撤销某次提交,push的时候不会有影响,HEAD指向新生成的commit</p>
 <p><strong>git reset</strong> : 回到历史的某一次提交,这次提交之后的内容会被删除,push的时候可能会有冲突,HEAD指向历史的某次commit</p>
