@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Aerial</title>
-    <link>https://longpf.github.io/post/</link>
-    <description>Recent content in Posts on Aerial</description>
+    <title>Posts on longpf</title>
+    <link>http://longpengfei.com/post/</link>
+    <description>Recent content in Posts on longpf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>longpf</copyright>
     <lastBuildDate>Wed, 03 Jan 2018 14:14:00 +0800</lastBuildDate>
     
-	<atom:link href="https://longpf.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://longpengfei.com/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>First</title>
-      <link>https://longpf.github.io/post/first/</link>
+      <link>http://longpengfei.com/post/first/</link>
       <pubDate>Wed, 03 Jan 2018 14:14:00 +0800</pubDate>
       
-      <guid>https://longpf.github.io/post/first/</guid>
+      <guid>http://longpengfei.com/post/first/</guid>
       <description></description>
     </item>
     
