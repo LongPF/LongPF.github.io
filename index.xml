@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>longpf</title>
-    <link>https://longpf.github.io/</link>
-    <description>Recent content on longpf</description>
+    <title>long·pf</title>
+    <link>longpengfei.com/</link>
+    <description>Recent content on long·pf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>longpf</copyright>
     
-	<atom:link href="https://longpf.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="longpengfei.com/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>
